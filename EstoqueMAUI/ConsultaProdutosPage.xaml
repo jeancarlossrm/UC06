@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="EstoqueMAUI.ConsultaProdutosPage"
+    Title="Gestão de Produtos"
+    BackgroundColor="#F1F5F9">
+
+    <Grid
+        Padding="25"
+        RowDefinitions="Auto,Auto,*,Auto"
+        RowSpacing="15">
+
+        <!-- CABEÇALHO -->
+        <VerticalStackLayout
+            Grid.Row="0"
+            Spacing="5">
+
+            <Label
+                Text="GESTÃO DE PRODUTOS"
+                FontSize="26"
+                FontAttributes="Bold"
+                TextColor="#005CA9"/>
+
+            <Label
+                Text="Consulte, pesquise, edite ou exclua produtos cadastrados."
+                FontSize="14"
+                TextColor="#64748B"/>
+
+        </VerticalStackLayout>
+
+        <!-- PESQUISA DE PRODUTOS -->
+        <Entry
+            Grid.Row="1"
+            x:Name="PesquisaEntry"
+            Placeholder="Pesquisar produto pelo nome..."
+            TextChanged="OnPesquisaChanged"
+            BackgroundColor="White"
+            TextColor="#1E293B"
+            PlaceholderColor="#94A3B8"
+            HeightRequest="45"/>
+
+        <!-- LISTAGEM DE PRODUTOS -->
+        <CollectionView
+            Grid.Row="2"
+            x:Name="ProdutosListView"
+            ItemsSource="{Binding Produtos}"
+            SelectionMode="Single"
+            SelectionChanged="OnProdutoSelecionado">
+
+            <!-- MENSAGEM QUANDO NÃO EXISTIREM PRODUTOS -->
+            <CollectionView.EmptyView>
+
+                <VerticalStackLayout
+                    Padding="20"
+                    Spacing="10">
+
+                    <Label
+                        Text="Nenhum produto encontrado."
+                        FontSize="16"
+                        TextColor="#64748B"
+                        HorizontalOptions="Center"/>
+
+                </VerticalStackLayout>
+
+            </CollectionView.EmptyView>
+
+            <!-- APARÊNCIA DE CADA PRODUTO -->
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate>
+
+                    <Border
+                        BackgroundColor="White"
+                        Stroke="#DCE5EF"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 10"
+                        Padding="15"
+                        Margin="0,0,0,10">
+
+                        <Grid ColumnDefinitions="*,Auto">
+
+                            <Label
+                                Text="{Binding Nome}"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                TextColor="#1E293B"
+                                VerticalOptions="Center"/>
+
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding Quantidade, StringFormat='Quantidade: {0}'}"
+                                FontSize="13"
+                                TextColor="#005CA9"
+                                VerticalOptions="Center"/>
+
+                        </Grid>
+
+                    </Border>
+
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <!-- ÁREA DE EDIÇÃO -->
+        <Border
+            Grid.Row="3"
+            BackgroundColor="White"
+            Stroke="#DCE5EF"
+            StrokeThickness="1"
+            StrokeShape="RoundRectangle 12"
+            Padding="20">
+
+            <VerticalStackLayout Spacing="12">
+
+                <Label
+                    Text="EDITAR PRODUTO SELECIONADO"
+                    FontSize="17"
+                    FontAttributes="Bold"
+                    TextColor="#005CA9"/>
+
+                <!-- CAMPO PARA EDITAR O NOME -->
+                <Entry
+                    x:Name="NomeEdicaoEntry"
+                    Placeholder="Nome do produto"
+                    BackgroundColor="#F1F5F9"
+                    TextColor="#1E293B"/>
+
+                <!-- CAMPO PARA EDITAR A QUANTIDADE -->
+                <Entry
+                    x:Name="QuantidadeEdicaoEntry"
+                    Placeholder="Quantidade"
+                    Keyboard="Numeric"
+                    BackgroundColor="#F1F5F9"
+                    TextColor="#1E293B"/>
+
+                <!-- BOTÕES DE ATUALIZAÇÃO E EXCLUSÃO -->
+                <Grid
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="10">
+
+                    <Button
+                        Grid.Column="0"
+                        Text="Salvar alterações"
+                        BackgroundColor="#005CA9"
+                        TextColor="White"
+                        Clicked="OnAtualizarClicked"/>
+
+                    <Button
+                        Grid.Column="1"
+                        Text="Excluir produto"
+                        BackgroundColor="#DC2626"
+                        TextColor="White"
+                        Clicked="OnExcluirClicked"/>
+
+                </Grid>
+
+                <!-- RETORNAR AO CADASTRO -->
+                <Button
+                    Text="Voltar ao cadastro"
+                    BackgroundColor="#64748B"
+                    TextColor="White"
+                    Clicked="OnVoltarClicked"/>
+
+            </VerticalStackLayout>
+
+        </Border>
+
+    </Grid>
+
+</ContentPage>
