@@ -1,4 +1,4 @@
-# EstoqueMAUI — Guia de Estudo
+# EstoqueMAUI — Guia de Estudo 
 
 Aplicativo desktop/multiplataforma em **.NET MAUI** para **controle de estoque de produtos**, desenvolvido seguindo as aulas da pasta `Aula`. O projeto permite **cadastrar, consultar, pesquisar, editar e excluir** produtos armazenados em memória.
 
